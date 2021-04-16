@@ -40,6 +40,8 @@ class AlienInvasion:
             self.ship.update()
             # 更新子弹的位置并删除消失的子弹
             self._update_bullets()
+            # 更新外星人的位置
+            self._update_aliens()
             # 绘制屏幕
             self._update_screen()
 
@@ -88,7 +90,6 @@ class AlienInvasion:
 
     def _create_fleet(self):
         """创建外星人群"""
-
         #
         alien = Alien(self)
         alien_width, alien_height = alien.rect.size
@@ -107,8 +108,6 @@ class AlienInvasion:
             for alien_number in range(numbers_aliens_x):
                 self._create_alien(alien_number, row_number)
 
-    # 创建一个外星人并将其加入当前行
-
     def _create_alien(self, alien_number, row_number):
         """创建一个外星人并将其放在当前行"""
         alien = Alien(self)
@@ -117,6 +116,10 @@ class AlienInvasion:
         alien.rect.x = alien.x
         alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)
+
+    def _update_aliens(self):
+        """更新外星人群中所有外星人的位置"""
+        self.aliens.update()
 
     def _update_screen(self):
         """每次循环都会重绘屏幕"""
