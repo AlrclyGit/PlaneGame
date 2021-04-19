@@ -81,6 +81,17 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+        # 响应子弹和外星人碰撞
+        self._check_bullet_alien_collisions()
+
+    def _check_bullet_alien_collisions(self):
+        """响应子弹和外星人碰撞"""
+        # 检查是否有子弹击中了外星人，如果是，就删除相应的子弹和外星人
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        if not self.aliens:
+            # 删除现有的子弹并新建一群外星人
+            self.bullets.empty()
+            self._create_fleet()
 
     def _fire_bullet(self):
         """创建一颗子弹，并将其加入编组 bullets 中"""
