@@ -1,18 +1,17 @@
 import pygame
+from pygame.sprite import Sprite
 
 
-class Ship:
+class Ship(Sprite):
     """管理飞船的类"""
 
     def __init__(self, ai_game):
         """初始化飞船并设置其初始位置"""
-
         # 获取屏幕对象
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         # 获取屏幕大小等信息
         self.screen_rect = self.screen.get_rect()
-
         # 加载飞船图片并获取其外接矩形
         self.image = pygame.image.load('images/ship.bmp')
         # 获取飞船大小等信息
@@ -36,3 +35,8 @@ class Ship:
     def blitme(self):
         """在指定位置绘制飞船"""
         self.screen.blit(self.image, self.rect)
+
+    def center_ship(self):
+        """让飞船在屏幕底端居中"""
+        self.rect.midbottom = self.screen_rect.midbottom
+        self.x = float(self.rect.x)
