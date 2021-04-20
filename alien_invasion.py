@@ -40,12 +40,13 @@ class AlienInvasion:
         while True:
             # 监视键盘和鼠标事件
             self._check_events()
-            # 更新飞船位置信息
-            self.ship.update()
-            # 更新子弹的位置并删除消失的子弹
-            self._update_bullets()
-            # 更新外星人的位置
-            self._update_aliens()
+            if self.stats.game_active:
+                # 更新飞船位置信息
+                self.ship.update()
+                # 更新子弹的位置并删除消失的子弹
+                self._update_bullets()
+                # 更新外星人的位置
+                self._update_aliens()
             # 绘制屏幕
             self._update_screen()
 
