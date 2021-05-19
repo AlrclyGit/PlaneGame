@@ -19,6 +19,9 @@ class Settings:
         self.fleet_drop_speed = 10
         # 加快游戏节奏的速度
         self.speedup_scale = 1.2
+        self.initialize_dynamic_setting()
+
+    def initialize_dynamic_setting(self):
         # 初始化随游戏进行而变化的设置
         self.ship_speed = 3.0  # 飞船移动速度
         self.bullet_speed = 3.0  # 子弹移动速度
