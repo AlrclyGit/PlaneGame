@@ -29,7 +29,7 @@ class Settings:
         self.bullet_speed = 3.0  # 子弹移动速度
         self.alien_speed = 2.0  # 外星人移动速度
         self.fleet_direction = 1  # 外星人移动方向。 为 1 表示向右，为-1 表示向左
-        self.alien_points = 50  # 外星人的分数
+        self.alien_points = 500  # 外星人的分数
 
     def increase_speed(self):
         """提高速度设置"""

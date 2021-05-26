@@ -150,6 +150,7 @@ class AlienInvasion:
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens)  # 更新游戏分数
             self.sb.prep_score()  # 更新分数显示
+            self.sb.check_high_score()  # 更新最高分
         if not self.aliens:
             # 如果外星人为空
             # 删除现有的子弹并新建一群外星人
