@@ -106,6 +106,7 @@ class AlienInvasion:
             self.stats.reset_stats()
             self.stats.game_active = True
             self.sb.prep_score()
+            self.sb.prep_level()
             # 清空余下的外星人和子弹
             self.aliens.empty()
             self.bullets.empty()
@@ -156,6 +157,9 @@ class AlienInvasion:
             # 删除现有的子弹并新建一群外星人
             self.bullets.empty()  # 删除子弹
             self._create_fleet()  # 创建外星人群
+            # 提高游戏等级
+            self.stats.level += 1
+            self.sb.prep_level()
             # 提高速度设置
             self.settings.increase_speed()  # 提高速度设置
             print(self.settings.alien_speed)  # 打印外星人的移动速度
@@ -192,7 +196,7 @@ class AlienInvasion:
         alien_width, alien_height = alien.rect.size
         alien.x = alien_width + 2 * alien_width * alien_number
         alien.rect.x = alien.x
-        alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
+        alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number + 50
         self.aliens.add(alien)
 
     def _update_aliens(self):

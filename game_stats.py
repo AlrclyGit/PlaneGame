@@ -15,3 +15,4 @@ class GameStats:
         """初始化在游戏运行期间可能变化的统计信息"""
         self.ships_left = self.settings.ship_limit
         self.score = 0  # 游戏分数记录
+        self.level = 1  # 当前游戏等级
