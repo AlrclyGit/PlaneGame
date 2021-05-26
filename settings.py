@@ -3,7 +3,6 @@ class Settings:
 
     def __init__(self):
         """初始化游戏的设置"""
-
         # 基础配置
         self.screen_width = 1200
         self.screen_height = 800
@@ -19,15 +18,16 @@ class Settings:
         self.fleet_drop_speed = 10
         # 加快游戏节奏的速度
         self.speedup_scale = 1.2
+        # 初始化随游戏进行而变化的设置
         self.initialize_dynamic_setting()
 
     def initialize_dynamic_setting(self):
-        # 初始化随游戏进行而变化的设置
+        """初始化随游戏进行而变化的设置"""
         self.ship_speed = 3.0  # 飞船移动速度
         self.bullet_speed = 3.0  # 子弹移动速度
         self.alien_speed = 2.0  # 外星人移动速度
-        # fleet_direction 为 1 表示向右，为-1 表示向左
-        self.fleet_direction = 1
+        self.fleet_direction = 1  # 外星人移动方向。 为 1 表示向右，为-1 表示向左
+        self.alien_points = 50  # 外星人的分数
 
     def increase_speed(self):
         """提高速度设置"""

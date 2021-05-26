@@ -4,11 +4,12 @@ class GameStats:
     def __init__(self, ai_game):
         """初始化统计信息"""
         self.settings = ai_game.settings
-        # 初始化在游戏运行期间可能变化的统计信息
-        self.ships_left = self.settings.ship_limit
         # 游戏活动状态标识
         self.game_active = False
+        # 初始化在游戏运行期间可能变化的统计信息
+        self.reset_stats()
 
     def reset_stats(self):
         """初始化在游戏运行期间可能变化的统计信息"""
         self.ships_left = self.settings.ship_limit
+        self.score = 0  # 游戏分数记录

@@ -8,6 +8,7 @@ from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
 from button import Button
+from scoreboard import Scoreboard
 
 
 class AlienInvasion:
@@ -26,9 +27,10 @@ class AlienInvasion:
         # self.settings.screen_height = self.screen.get_rect().height
         # 设置标题
         pygame.display.set_caption("Alien Invasion")
-        # 创建一个用于存储游戏统计信息的实例
-        self.stats = GameStats(self)
-        # 获取飞船对象
+        # 创建一个用于存储游戏统计信息的实例,并创建计分牌
+        self.stats = GameStats(self)  # 游戏统计
+        self.sb = Scoreboard(self)  # 计分牌
+        # 创建飞船对象
         self.ship = Ship(self)
         # 创建子弹编组
         self.bullets = pygame.sprite.Group()
@@ -141,15 +143,18 @@ class AlienInvasion:
 
     def _check_bullet_alien_collisions(self):
         """响应子弹和外星人碰撞"""
-        # 检查是否有子弹击中了外星人，如果是，就删除相应的子弹和外星人
-        pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)  # 检查是否有子弹击中了外星人，如果是，就删除相应的子弹和外星人
+        if collisions:
+            # 如果有碰撞发生，记录分数
+            self.stats.score += self.settings.alien_points  # 更新游戏分数
+            self.sb.prep_score()  # 更新分数显示
         if not self.aliens:
-            # 删除现有的子弹并新建一群外星人
-            self.bullets.empty()
-            self._create_fleet()
+            # 如果外星人为空，删除现有的子弹并新建一群外星人
+            self.bullets.empty()  # 删除子弹
+            self._create_fleet()  # 创建外星人群
             # 提高速度设置
-            self.settings.increase_speed()
-            print(self.settings.alien_speed)
+            self.settings.increase_speed()  # 提高速度设置
+            print(self.settings.alien_speed)  # 打印外星人的移动速度
 
     def _fire_bullet(self):
         """创建一颗子弹，并将其加入编组 bullets 中"""
@@ -220,6 +225,8 @@ class AlienInvasion:
             bullet.draw_bullet()
         # 绘制外星人
         self.aliens.draw(self.screen)
+        # 显示得分
+        self.sb.show_score()
         # 如果游戏处于非活动状态，就绘制 Play 按钮
         if not self.stats.game_active:
             self.play_button.draw_button()
