@@ -7,6 +7,8 @@ class Ship(Sprite):
 
     def __init__(self, ai_game):
         """初始化飞船并设置其初始位置"""
+        # 调用父类的__init__
+        super().__init__()
         # 获取屏幕对象
         self.screen = ai_game.screen
         self.settings = ai_game.settings
