@@ -18,6 +18,8 @@ class Settings:
         self.fleet_drop_speed = 10
         # 加快游戏节奏的速度
         self.speedup_scale = 1.2
+        # 外星人分数的提高速度
+        self.score_scale = 1.5
         # 初始化随游戏进行而变化的设置
         self.initialize_dynamic_setting()
 
@@ -34,3 +36,4 @@ class Settings:
         self.ship_speed *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
         self.alien_speed *= self.speedup_scale
+        self.alien_points = int(self.alien_points * self.score_scale)
