@@ -105,6 +105,7 @@ class AlienInvasion:
             # 重置游戏统计信息
             self.stats.reset_stats()
             self.stats.game_active = True
+            self.sb.prep_score()
             # 清空余下的外星人和子弹
             self.aliens.empty()
             self.bullets.empty()
@@ -149,7 +150,8 @@ class AlienInvasion:
             self.stats.score += self.settings.alien_points  # 更新游戏分数
             self.sb.prep_score()  # 更新分数显示
         if not self.aliens:
-            # 如果外星人为空，删除现有的子弹并新建一群外星人
+            # 如果外星人为空
+            # 删除现有的子弹并新建一群外星人
             self.bullets.empty()  # 删除子弹
             self._create_fleet()  # 创建外星人群
             # 提高速度设置
